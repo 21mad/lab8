@@ -1,14 +1,19 @@
 class TaskController < ApplicationController
+  before_action :raise_error, only: [:show]
+
   def input
   end
 
   def show
+    @max_seg = 0
     str = params[:array]
     arr = str.split(' ').map { |el| el.to_i }
     @segments = get_segments(arr)
-    @max_seg = (@segments.max_by { |elem| elem[:length] })[:segment]
+    @max_seg = (@segments.max_by { |elem| elem[:length] })[:segment] unless @segments.nil? || @segments.empty?
     @count = @segments.length
   end
+
+  private
 
   def is_perfect?(num)
     summ = 0
@@ -36,5 +41,15 @@ class TaskController < ApplicationController
     end
     result.append({ length: len, segment: seg.join(' ') }) if len.positive?
     result
+  end
+
+  def raise_error
+    if params[:array].nil? || params[:array].empty?
+      flash[:error] = 'Ошибка: параметры не должны быть пустыми.'
+      redirect_to root_path
+    elsif !params[:array].match(/^( ?-?\d)+$/)
+      flash[:error] = 'Ошибка: параметры введены некорректно.'
+      redirect_to root_path
+    end
   end
 end

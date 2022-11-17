@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: d8b50a4cca2850c85d170b18744964f3a283304b
+  branch: main
+  specs:
+    faker (3.0.0)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,7 +93,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.5.11)
-    irb (1.4.2)
+    irb (1.4.3)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -189,7 +197,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.4)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-linux
@@ -197,8 +205,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  faker!
   importmap-rails
   jbuilder
+  nokogiri
   puma (~> 5.0)
   rails (~> 7.0.4)
   rspec-rails (~> 6.0.0)
