@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
+# Controller class for task
 class TaskController < ApplicationController
   before_action :raise_error, only: [:show]
 
-  def input
-  end
+  def input; end
 
   def show
     @max_seg = 0
     str = params[:array]
-    arr = str.split(' ').map { |el| el.to_i }
+    arr = str.split(' ').map(&:to_i)
     @segments = get_segments(arr)
     @max_seg = (@segments.max_by { |elem| elem[:length] })[:segment] unless @segments.nil? || @segments.empty?
     @count = @segments.length
@@ -15,7 +17,7 @@ class TaskController < ApplicationController
 
   private
 
-  def is_perfect?(num)
+  def perfect?(num)
     summ = 0
     ans = false
     (1...num).each do |i|
@@ -30,7 +32,7 @@ class TaskController < ApplicationController
     len = 0
     seg = []
     array.each do |elem|
-      if is_perfect?(elem)
+      if perfect?(elem)
         len += 1
         seg.append(elem)
       else
